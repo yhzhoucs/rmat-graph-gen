@@ -343,7 +343,8 @@ class BuilderBase {
     CSRGraph<NodeID_, DestID_, invert> g;
     {  // extra scope to trigger earlier deletion of el (save memory)
       EdgeList el;
-      if (cli_.filename() != "") {
+      // FIXME: hack to skip file reading
+      if (0/* cli_.filename() != ""*/) {
         Reader<NodeID_, DestID_, WeightT_, invert> r(cli_.filename());
         if ((r.GetSuffix() == ".sg") || (r.GetSuffix() == ".wsg")) {
           return r.ReadSerializedGraph();

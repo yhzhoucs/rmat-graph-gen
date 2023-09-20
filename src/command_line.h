@@ -76,10 +76,13 @@ class CLBase {
       std::cout << "No graph input specified. (Use -h for help)" << std::endl;
       return false;
     }
+    // FIXME: hack to force rmat graph to be undirected
     if (scale_ != -1)
-      symmetrize_ = true;
+      symmetrize_ = false/* true */;
     return true;
   }
+
+  std::string const &get_filename() const { return this->filename_; }
 
   void virtual HandleArg(signed char opt, char* opt_arg) {
     switch (opt) {

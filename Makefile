@@ -16,8 +16,6 @@ ifneq ($(SERIAL), 1)
 	CXX_FLAGS += $(PAR_FLAG)
 endif
 
-# KERNELS = bc bfs cc cc_sv pr pr_spmv sssp tc
-# SUITE = $(KERNELS) converter
 SUITE = rmat-gen
 
 
@@ -26,13 +24,6 @@ all: $(SUITE)
 
 % : src/%.cc src/*.h
 	$(CXX) $(CXX_FLAGS) $< -o $@
-
-# Testing
-include test/test.mk
-
-# Benchmark Automation
-include benchmark/bench.mk
-
 
 .PHONY: clean
 clean:
