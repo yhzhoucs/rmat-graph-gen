@@ -1,0 +1,12 @@
+{
+    "files.associations": {
+        "algorithm": "cpp",
+        "cstdlib": "cpp",
+        "type_traits": "cpp",
+        "iostream": "cpp",
+        "cstddef": "cpp",
+        "cinttypes": "cpp",
+        "fstream": "cpp"
+    },
+    "C_Cpp.default.compilerPath": "/usr/bin/gcc-13"
+}
