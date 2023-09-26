@@ -1,5 +1,7 @@
 rmat-gen
 
+*.txt
+
 test/out/*.out
 
 benchmark/out/*.out
