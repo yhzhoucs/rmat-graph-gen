@@ -1,0 +1,16 @@
+[package]
+name = "rmat_graph_gen"
+version = "0.1.0"
+edition = "2021"
+
+[dev-dependencies]
+criterion = { version = "0.5.1", features = ["html_reports"] }
+
+[dependencies]
+rand = "0.8.5"
+rayon = "1.10.0"
+clap = { version = "4.5.20", features = ["derive"] }
+
+[[bench]]
+name = "bench_generator"
+harness = false
