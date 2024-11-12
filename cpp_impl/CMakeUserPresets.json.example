@@ -10,8 +10,7 @@
                 "strategy": "external"
             },
             "cacheVariables": {
-                "CMAKE_C_COMPILER": "$env{HOME}/local/bin/gcc",
-                "CMAKE_CXX_COMPILER": "$env{HOME}/local/bin/g++"
+                "$comment": "You may need to set CMAKE_CXX_COMPILER here if you are using a non-default compiler"
             }
         },
         {
@@ -29,6 +28,8 @@
             "description": "x64 Release build",
             "inherits": "base",
             "cacheVariables": {
+                "$comment": "You may not need to set CMAKE_BUILD_RPATH below if you are using the default compiler",
+                "CMAKE_BUILD_RPATH": "/usr/local/gcc-14.2.0/lib64",
                 "CMAKE_BUILD_TYPE": "Release",
                 "BUILD_TESTING": "OFF"
             }

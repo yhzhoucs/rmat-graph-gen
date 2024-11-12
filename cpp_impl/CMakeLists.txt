@@ -7,7 +7,7 @@ project(rmat_graph_gen
 
 option(BUILD_TESTING "Build the tests" ON)
 
-set(CMAKE_CXX_STANDARD 20)
+set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED True)
 
 add_library(generator src/generator.cpp)
