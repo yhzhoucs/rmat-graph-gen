@@ -13,6 +13,7 @@ public:
     EdgeList generate();
 #if defined (_OPENMP)
     EdgeList generate_par();
+    void remap_par(EdgeList& edges);
 #endif
 private:
     std::size_t scale;

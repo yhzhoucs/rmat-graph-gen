@@ -84,4 +84,17 @@ Generator::EdgeList Generator::generate_par() {
     remap(edges);
     return edges;
 }
+
+void Generator::remap_par(EdgeList& edges) {
+    std::size_t vertex_number = 1 << scale;
+    std::vector<std::size_t> new_ids(vertex_number);
+    std::iota(new_ids.begin(), new_ids.end(), 0);
+    std::mt19937 rng(seed.value_or(std::random_device()()));
+    std::shuffle(new_ids.begin(), new_ids.end(), rng);
+    #pragma omp parallel for
+    for (int i = 0; i < edges.size(); ++i) {
+        edges[i].first = new_ids[edges[i].first];
+        edges[i].second = new_ids[edges[i].second];
+    }
+}
 #endif

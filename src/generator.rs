@@ -29,10 +29,24 @@ impl Generator {
         }
     }
 
+    fn remap_par(&self, el: &mut Vec<(u64, u64)>) {
+        let vertex_number = 1 << self.scale;
+        let mut new_ids: Vec<usize> = (0..vertex_number).collect();
+        let mut rng = match self.rnd_seed {
+            Some(seed) => StdRng::seed_from_u64(seed),
+            None => StdRng::from_entropy()
+        };
+        new_ids.shuffle(&mut rng);
+        el.par_iter_mut().for_each(|(src, dst)| {
+            *src = new_ids[*src as usize] as u64;
+            *dst = new_ids[*dst as usize] as u64;
+        });
+    }
+
     pub fn generate_par(&self) -> Vec<(u64, u64)> {
         let num_threads = rayon::current_num_threads();
         let chunk_size = 1.max((self.edge_number + num_threads - 1) / num_threads);
-        (0..self.edge_number).into_par_iter()
+        let mut result = (0..self.edge_number).into_par_iter()
             .chunks(chunk_size)
             .enumerate()
             .map(|(chunk_id, chunk)| {
@@ -64,7 +78,9 @@ impl Generator {
                 result
             })
             .flatten()
-            .collect()
+            .collect();
+        self.remap_par(&mut result);
+        result
     }
 
     pub fn generate(&self) -> Vec<(u64, u64)> {
